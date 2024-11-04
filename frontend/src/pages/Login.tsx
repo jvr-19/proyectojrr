@@ -13,7 +13,13 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 
+//Importamos el useDispatch del react-redux
+import { useDispatch } from 'react-redux'
+//Importamos las acciones que están en el fichero authSlice.ts
+import { authActions } from '../store/authSlice';
+
 function Login() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [attempted, setAttempted] = useState(false);
   const [enabled, setEnabled] = useState(false)
@@ -44,6 +50,11 @@ function Login() {
     setAttempted(true);
     //Aquí iría el código que quiero que se ejecute
     if (data.user == bduser && data.password == bdpasswd) {
+      //aquí pongo el dispatch para cambiar el estado a login en el store del redux
+      dispatch(authActions.login({
+        name: data.user, //data.user es el nombre de usuario que ha ingresado el usuario
+        rol: 'administrador'
+      }))
       navigate('/home')
       setEnabled(true)
     } else {

@@ -4,9 +4,13 @@ import App from './App.tsx'
 import CssBaseline from '@mui/material/CssBaseline'
 // import './index.css'
 import createTheme from '@mui/material/styles/createTheme';
-import ThemeProvider from '@mui/material/styles/ThemeProvider';
+import ThemeProvider from '@mui/material/styles/ThemeProvider'
+//Importamos el componente Provider de la librearía react-redux
+import { Provider } from 'react-redux'
+//Importamos el componente store que definimos en el fichero ./store/index
+import { store } from './store/index'
 
-const customTheme = createTheme ({
+const customTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
@@ -33,7 +37,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider theme={customTheme}>
       <CssBaseline />
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ThemeProvider>
   </StrictMode>
 )
