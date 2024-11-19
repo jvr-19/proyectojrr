@@ -1,13 +1,15 @@
 import React from 'react'
 import '../App.css';
-import Typography from '@mui/material/Typography';
+import Menus from '../components/Menu';
+import { Typography } from '@mui/material';
 
 
 function Reports() {
 
   return (
     <>
-        <Typography>Página Reports de Javier</Typography>
+      <Menus />
+      <Typography>Página Reports de Javier</Typography>
     </>
   )
 }

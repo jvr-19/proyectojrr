@@ -23,7 +23,7 @@ function Login() {
   const navigate = useNavigate()
   const [attempted, setAttempted] = useState(false);
   const [enabled, setEnabled] = useState(false)
-  const [data, setData] = useState({ user: '', password: '' })
+  const [data, setData] = useState({ user: '', passwd: '' })
 
   const handleChangeUser = (e: any) => {
     setData({
@@ -36,31 +36,37 @@ function Login() {
   const handleChangePassword = (e: any) => {
     setData({
       ...data,
-      password: e.target.value
+      passwd: e.target.value
     })
     //console.log(data)
   }
 
-  const bduser = 'javier'
-  const bdpasswd = '1234'
+  async function isVerifiedUser() {
+    fetch(`http://localhost:3030/login?user=${data.user}&password=${data.passwd}`)
+      .then(response => response.json())
+      .then(response => {
+        console.log('Lo que nos llega de la base de datos: ')
+        console.log(response.data)
+        if (response.data.length !== 0) {
+          //Si hay datos es que el usuario y contraseña son los correctos. Hago el dispatch y el
+          //navigate
+          dispatch(authActions.login({ isAutenticated: true, name: response.data.nombre, rol: response.data.rol })) // Dispatch login action
+          navigate('/home')
+          setEnabled(true)
+        } else {
+          //Si no, realizo la lógica para alertar al usuario con usuario/contraseña son incorrectas
+          setEnabled(false)
+        }
+      })
+  }
+
 
   const handleSubmit = (e: any) => {
     //Para que no mande el formulario, sino que haga lo que yo le diga.
     e.preventDefault()
     setAttempted(true);
     //Aquí iría el código que quiero que se ejecute
-    if (data.user == bduser && data.password == bdpasswd) {
-      //aquí pongo el dispatch para cambiar el estado a login en el store del redux
-      dispatch(authActions.login({
-        name: data.user, //data.user es el nombre de usuario que ha ingresado el usuario
-        rol: 'administrador'
-      }))
-      navigate('/home')
-      setEnabled(true)
-    } else {
-      setEnabled(false)
-    }
-    console.log(data)
+    isVerifiedUser()
   }
 
   return (
@@ -106,7 +112,7 @@ function Login() {
                     fullWidth
                     color="primary"
                     type='password'
-                    value={data.password}
+                    value={data.passwd}
                     onChange={handleChangePassword}
 
                   />
