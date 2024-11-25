@@ -1,6 +1,8 @@
 import '../App.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/index';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
@@ -33,6 +35,7 @@ const itemInitialState: ItemType = {
 function Dashboard() {
     const [item, setItem] = useState(itemInitialState);
     const [tableData, setTableData] = useState([]);
+    const userData = useSelector((state: RootState) => state.authenticator);
 
     const handleChange = (e: any) => {
         const { name, value, type } = e.target;
@@ -92,8 +95,8 @@ function Dashboard() {
     return (
         <>
             <Box component='form' sx={{ padding: '20px', margin: 'auto' }} onSubmit={handleSubmit}>
-                <Grid container spacing={2}>
-                    <Grid size={3}>
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Grid size={{ xs: 2, sm: 4, md: 6 }}>
                         <TextField
                             label="Nombre"
                             name="nombre"
@@ -103,7 +106,7 @@ function Dashboard() {
                             fullWidth
                         />
                     </Grid>
-                    <Grid size={3}>
+                    <Grid size={{ xs: 2, sm: 4, md: 6 }}>
                         <TextField
                             label="Marca"
                             name="marca"
@@ -113,7 +116,7 @@ function Dashboard() {
                             fullWidth
                         />
                     </Grid>
-                    <Grid size={3}>
+                    <Grid size={{ xs: 2, sm: 4, md: 6 }}>
                         <TextField
                             label="Tipo"
                             name="tipo"
@@ -123,7 +126,7 @@ function Dashboard() {
                             fullWidth
                         />
                     </Grid>
-                    <Grid size={3}>
+                    <Grid size={{ xs: 2, sm: 4, md: 6 }}>
                         <TextField
                             label="Precio"
                             name="precio"
@@ -148,7 +151,7 @@ function Dashboard() {
                                     <TableCell colSpan={5}>Tabla Coleccion</TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell />
+                                    {userData.userRol === 'admin' && <TableCell />}
                                     <TableCell>Nombre</TableCell>
                                     <TableCell>Marca</TableCell>
                                     <TableCell>Tipo</TableCell>
@@ -158,11 +161,13 @@ function Dashboard() {
                             <TableBody>
                                 {tableData.map((row: ItemType) => (
                                     <TableRow key={row.id}>
-                                        <TableCell>
-                                            <Button color='secondary' onClick={() => handleDeleteItem(row)}>
-                                                <DeleteForeverIcon />
-                                            </Button>
-                                        </TableCell>
+                                        {userData.userRol === 'admin' && (
+                                            <TableCell>
+                                                <Button color="secondary" onClick={() => handleDeleteItem(row)}>
+                                                    <DeleteForeverIcon />
+                                                </Button>
+                                            </TableCell>
+                                        )}
                                         <TableCell>{row.nombre}</TableCell>
                                         <TableCell>{row.marca}</TableCell>
                                         <TableCell>{row.tipo}</TableCell>

@@ -56,16 +56,18 @@ function Menus() {
                         </ListItemButton>
                     </ListItem>
                 </Link>
-                <Link to="/reports" style={{ textDecoration: 'none', color: 'white' }}>
-                    <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <FeedIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Informes" />
-                        </ListItemButton>
-                    </ListItem>
-                </Link>
+                {userData.userRol === 'admin' && (
+                    <Link to="/reports" style={{ textDecoration: 'none', color: 'white' }}>
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <FeedIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Informes" />
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
+                )}
                 <Link to="/ayuda" style={{ textDecoration: 'none', color: 'white' }}>
                     <ListItem disablePadding>
                         <ListItemButton>
