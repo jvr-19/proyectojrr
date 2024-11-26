@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store/index';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
 import Grid from '@mui/material/Grid2';
 import TextField from '@mui/material/TextField';
 import Table from '@mui/material/Table';
@@ -74,6 +75,9 @@ function Dashboard() {
         }
     };
 
+    const RoleGuest = userData.userRol === 'guest' ? <Button type="submit" variant="outlined" color="primary" disabled fullWidth>Insertar</Button>
+        : <Button type="submit" variant="outlined" color="primary" fullWidth>Insertar</Button>;
+
     // Llamar a fetchData cuando el componente se monte
     useEffect(() => {
         fetchData();
@@ -138,9 +142,9 @@ function Dashboard() {
                         />
                     </Grid>
                     <Grid size={12}>
-                        <Button type="submit" variant="outlined" color="primary" fullWidth>
-                            Insertar
-                        </Button>
+                        <Tooltip title="Insertar datos" arrow>
+                            {RoleGuest}
+                        </Tooltip>
                     </Grid>
                 </Grid>
                 <Box mt={4}>
@@ -163,9 +167,11 @@ function Dashboard() {
                                     <TableRow key={row.id}>
                                         {userData.userRol === 'admin' && (
                                             <TableCell>
-                                                <Button color="secondary" onClick={() => handleDeleteItem(row)}>
-                                                    <DeleteForeverIcon />
-                                                </Button>
+                                                <Tooltip title="Eliminar registro" arrow>
+                                                    <Button color="secondary" onClick={() => handleDeleteItem(row)}>
+                                                        <DeleteForeverIcon />
+                                                    </Button>
+                                                </Tooltip>
                                             </TableCell>
                                         )}
                                         <TableCell>{row.nombre}</TableCell>

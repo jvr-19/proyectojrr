@@ -5,6 +5,7 @@ import Menus from '../components/Menu';
 import InformeColeccion from '../components/InformeColeccion';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
 function Reports() {
@@ -33,14 +34,16 @@ function Reports() {
           Generación de Informes
         </Typography>
         {!mostrarInforme ? (
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleGenerarInforme}
-            size="large"
-          >
-            INFORME COLECCION
-          </Button>
+          <Tooltip title="Generar informe" arrow>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleGenerarInforme}
+              size="large"
+            >
+              INFORME COLECCION
+            </Button>
+          </Tooltip>
         ) : (
           <InformeColeccion datos={datosColeccion} />
         )}

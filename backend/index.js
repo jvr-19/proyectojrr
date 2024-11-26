@@ -4,6 +4,7 @@ const cors = require('cors')
 //importo el fichero login.js que está en la carpeta services
 const login = require('./services/login')
 const items = require('./services/items')
+const users = require('./services/users')
 
 //Definimos el puerto por que va a escuchar nuestra API las peticiones
 const port = 3030
@@ -64,6 +65,25 @@ app.get('/deleteItem', async function (req, res, next) {
         res.json(await items.deleteData(req, res))
     } catch (err) {
         console.error(`Error while deleting items `, err.message);
+        next(err);
+    }
+})
+
+app.get('/addUser', async function (req, res, next) {
+    console.log(req.query)
+    try {
+        res.json(await users.insertUser(req, res))
+    } catch (err) {
+        console.error(`Error while inserting users `, err.message);
+        next(err);
+    }
+})
+
+app.get('/getUsers', async function (req, res, next) {
+    try {
+        res.json(await users.getUser(req, res))
+    } catch (err) {
+        console.error(`Error while getting users `, err.message);
         next(err);
     }
 })

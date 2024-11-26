@@ -22,8 +22,11 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AdminIcon from '@mui/icons-material/AdminPanelSettings';
 import HelpIcon from '@mui/icons-material/Help';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import AdbIcon from '@mui/icons-material/Adb';
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Tooltip from '@mui/material/Tooltip';
 
 function Menus() {
     const navigate = useNavigate();
@@ -41,50 +44,72 @@ function Menus() {
         setDrawerOpen(open);
     };
 
-    const RoleIcon = userData.userRol === 'admin' ? AdminIcon : AccountCircle;
+    const RoleIcon = userData.userRol === 'admin' ? AdminIcon : userData.userRol === 'guest' ? InsertEmoticonIcon : AdbIcon;
 
     const DrawerList = (
         <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
             <List onClick={toggleDrawer(false)}>
                 <Link to="/home" style={{ textDecoration: 'none', color: 'white' }}>
                     <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <HomeIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Inicio" />
-                        </ListItemButton>
+                        <Tooltip title="Página Inicio" arrow>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <HomeIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Inicio" />
+                            </ListItemButton>
+                        </Tooltip>
                     </ListItem>
                 </Link>
                 {userData.userRol === 'admin' && (
                     <Link to="/reports" style={{ textDecoration: 'none', color: 'white' }}>
                         <ListItem disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <FeedIcon />
-                                </ListItemIcon>
-                                <ListItemText primary="Informes" />
-                            </ListItemButton>
+                            <Tooltip title="Página Informes" arrow>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <FeedIcon />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Informes" />
+                                </ListItemButton>
+                            </Tooltip>
                         </ListItem>
                     </Link>
                 )}
-                <Link to="/ayuda" style={{ textDecoration: 'none', color: 'white' }}>
+                {userData.userRol === 'admin' && (
+                    <Link to="/users" style={{ textDecoration: 'none', color: 'white' }}>
+                        <ListItem disablePadding>
+                            <Tooltip title="Gestionar usuarios" arrow>
+                                <ListItemButton>
+                                    <ListItemIcon>
+                                        <AccountCircle />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Gestión Usuarios" />
+                                </ListItemButton>
+                            </Tooltip>
+                        </ListItem>
+                    </Link>
+                )}
+                <Link to="/Rico_Rodríguez_Javier_UT4A1.pdf" target='_blank' style={{ textDecoration: 'none', color: 'white' }}>
                     <ListItem disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <HelpIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Ayuda" />
-                        </ListItemButton>
+                        <Tooltip title="Página Ayuda" arrow>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    <HelpIcon />
+                                </ListItemIcon>
+                                <ListItemText primary="Ayuda" />
+                            </ListItemButton>
+                        </Tooltip>
                     </ListItem>
                 </Link>
                 <ListItem disablePadding>
-                    <ListItemButton onClick={() => navigate('/')}>
-                        <ListItemIcon>
-                            <ExitToAppIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Salir" />
-                    </ListItemButton>
+                    <Tooltip title="Cerrar sesión" arrow>
+                        <ListItemButton onClick={() => navigate('/')}>
+                            <ListItemIcon>
+                                <ExitToAppIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Salir" />
+                        </ListItemButton>
+                    </Tooltip>
                 </ListItem>
             </List>
         </Box >
@@ -106,15 +131,19 @@ function Menus() {
                 borderRadius: '10px',
             }}>
                 <Toolbar>
-                    <IconButton edge="start" color="primary" onClick={toggleDrawer(true)}>
-                        <MenuIcon />
-                    </IconButton>
+                    <Tooltip title="Abrir menu" arrow>
+                        <IconButton edge="start" color="primary" onClick={toggleDrawer(true)}>
+                            <MenuIcon />
+                        </IconButton>
+                    </Tooltip>
                     <div style={{ flexGrow: 1, textAlign: 'center' }}>
                         <Typography color="primary">{userData.userName}</Typography>
                     </div>
-                    <IconButton edge="end" color="primary" onClick={handleMenu(true)}>
-                        <RoleIcon />
-                    </IconButton>
+                    <Tooltip title="Ver información usuario" arrow>
+                        <IconButton edge="end" color="primary" onClick={handleMenu(true)}>
+                            <RoleIcon />
+                        </IconButton>
+                    </Tooltip>
                     <Menu
                         anchorOrigin={{
                             vertical: 'top',

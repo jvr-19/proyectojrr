@@ -12,6 +12,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
+import Tooltip from '@mui/material/Tooltip';
 
 //Importamos el useDispatch del react-redux
 import { useDispatch } from 'react-redux'
@@ -118,7 +119,9 @@ function Login() {
                   />
                 </Grid>
                 <Grid size={12}>
-                  <Button type='submit' variant='outlined' color='secondary' fullWidth>Acceder</Button>
+                  <Tooltip title="Iniciar sesión" arrow>
+                    <Button type='submit' variant='outlined' color='secondary' fullWidth>Acceder</Button>
+                  </Tooltip>
                 </Grid>
               </Grid>
             </Box>
