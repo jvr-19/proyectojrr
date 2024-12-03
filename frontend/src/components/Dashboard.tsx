@@ -142,7 +142,7 @@ function Dashboard() {
                         />
                     </Grid>
                     <Grid size={12}>
-                        <Tooltip title="Insertar datos" arrow>
+                        <Tooltip placement="bottom" title="Insertar datos" arrow>
                             {RoleGuest}
                         </Tooltip>
                     </Grid>
@@ -167,7 +167,7 @@ function Dashboard() {
                                     <TableRow key={row.id}>
                                         {userData.userRol === 'admin' && (
                                             <TableCell>
-                                                <Tooltip title="Eliminar registro" arrow>
+                                                <Tooltip placement="bottom" title="Eliminar registro" arrow>
                                                     <Button color="secondary" onClick={() => handleDeleteItem(row)}>
                                                         <DeleteForeverIcon />
                                                     </Button>

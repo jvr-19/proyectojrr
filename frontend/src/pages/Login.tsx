@@ -119,7 +119,7 @@ function Login() {
                   />
                 </Grid>
                 <Grid size={12}>
-                  <Tooltip title="Iniciar sesión" arrow>
+                  <Tooltip placement="bottom" title="Iniciar sesión" arrow>
                     <Button type='submit' variant='outlined' color='secondary' fullWidth>Acceder</Button>
                   </Tooltip>
                 </Grid>

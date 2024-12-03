@@ -51,7 +51,7 @@ function Menus() {
             <List onClick={toggleDrawer(false)}>
                 <Link to="/home" style={{ textDecoration: 'none', color: 'white' }}>
                     <ListItem disablePadding>
-                        <Tooltip title="Página Inicio" arrow>
+                        <Tooltip placement="bottom" title="Página Inicio" arrow>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <HomeIcon />
@@ -64,7 +64,7 @@ function Menus() {
                 {userData.userRol === 'admin' && (
                     <Link to="/reports" style={{ textDecoration: 'none', color: 'white' }}>
                         <ListItem disablePadding>
-                            <Tooltip title="Página Informes" arrow>
+                            <Tooltip placement="bottom" title="Página Informes" arrow>
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <FeedIcon />
@@ -78,7 +78,7 @@ function Menus() {
                 {userData.userRol === 'admin' && (
                     <Link to="/users" style={{ textDecoration: 'none', color: 'white' }}>
                         <ListItem disablePadding>
-                            <Tooltip title="Gestionar usuarios" arrow>
+                            <Tooltip placement="bottom" title="Gestionar usuarios" arrow>
                                 <ListItemButton>
                                     <ListItemIcon>
                                         <AccountCircle />
@@ -91,7 +91,7 @@ function Menus() {
                 )}
                 <Link to="/Rico_Rodríguez_Javier_UT4A1.pdf" target='_blank' style={{ textDecoration: 'none', color: 'white' }}>
                     <ListItem disablePadding>
-                        <Tooltip title="Página Ayuda" arrow>
+                        <Tooltip placement="bottom" title="Página Ayuda" arrow>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <HelpIcon />
@@ -102,7 +102,7 @@ function Menus() {
                     </ListItem>
                 </Link>
                 <ListItem disablePadding>
-                    <Tooltip title="Cerrar sesión" arrow>
+                    <Tooltip placement="bottom" title="Cerrar sesión" arrow>
                         <ListItemButton onClick={() => navigate('/')}>
                             <ListItemIcon>
                                 <ExitToAppIcon />
@@ -131,7 +131,7 @@ function Menus() {
                 borderRadius: '10px',
             }}>
                 <Toolbar>
-                    <Tooltip title="Abrir menu" arrow>
+                    <Tooltip placement="bottom" title="Abrir menu" arrow>
                         <IconButton edge="start" color="primary" onClick={toggleDrawer(true)}>
                             <MenuIcon />
                         </IconButton>
@@ -139,7 +139,7 @@ function Menus() {
                     <div style={{ flexGrow: 1, textAlign: 'center' }}>
                         <Typography color="primary">{userData.userName}</Typography>
                     </div>
-                    <Tooltip title="Ver información usuario" arrow>
+                    <Tooltip placement="bottom" title="Ver información usuario" arrow>
                         <IconButton edge="end" color="primary" onClick={handleMenu(true)}>
                             <RoleIcon />
                         </IconButton>

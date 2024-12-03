@@ -125,7 +125,7 @@ function MostrarTabla() {
                         />
                     </Grid>
                     <Grid size={12}>
-                        <Tooltip title="Insertar usuario" arrow>
+                        <Tooltip placement="bottom" title="Insertar usuario" arrow>
                             <Button type="submit" variant="outlined" color="primary" fullWidth>
                                 Insertar
                             </Button>
